@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+* {
+  background-color: #111827;
+}
 main {
-  @apply text-white bg-[#111827] m-0 p-0 box-border
+  @apply text-white  m-0 p-0 box-border
 }
 
 /* :root {

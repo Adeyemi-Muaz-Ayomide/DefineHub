@@ -6,7 +6,7 @@ export default function Footer() {
           {/* <hr className='mb-6 border-gray-700 sm:mx-auto lg:mb-8' /> */}
           <div className="p-4 sm:flex sm:items-center sm:justify-between sm:px-6 sm:pb-6">
             <span className="flex flex-wrap justify-center gap-1 text-center text-base text-gray-400">
-              © 2023 LingoLookup™. Powered by the{" "}
+              © 2023 DefineHub™. Powered by the{" "}
               <a
                 href="https://dictionaryapi.dev"
                 target="_blank"
@@ -19,7 +19,7 @@ export default function Footer() {
             {/* Social Icons */}
             <div className="mt-6 flex place-items-center justify-center space-x-6 sm:mt-0">
               <a
-                href="https://github.com/jeremy0x/lingo-lookup/"
+                href="https://github.com/Adeyemi-Muaz-Ayomide/DefineHub"
                 target="_blank"
                 rel="noopener"
                 className="text-gray-500 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-110 hover:text-white"
@@ -40,23 +40,7 @@ export default function Footer() {
                 <span className="sr-only">GitHub repository</span>
               </a>
               <a
-                href="https://jeremy0x.hashnode.dev/"
-                target="_blank"
-                rel="noopener"
-                className="text-gray-500 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-110 hover:text-blue-700"
-                title="View Hashnode Blog"
-              >
-                <svg
-                  className="h-4 w-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="m22.351 8.019-6.37-6.37a5.63 5.63 0 0 0-7.962 0l-6.37 6.37a5.63 5.63 0 0 0 0 7.962l6.37 6.37a5.63 5.63 0 0 0 7.962 0l6.37-6.37a5.63 5.63 0 0 0 0-7.962zM12 15.953a3.953 3.953 0 1 1 0-7.906 3.953 3.953 0 0 1 0 7.906z"></path>
-                </svg>
-                <span className="sr-only">Hashnode blog</span>
-              </a>
-              <a
-                href="https://twitter.com/jeremy0x_/"
+                href="https://twitter.com/AdeyemiMuadh"
                 target="_blank"
                 rel="noopener"
                 className="text-gray-500 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-110 hover:text-blue-400"
@@ -73,7 +57,7 @@ export default function Footer() {
                 <span className="sr-only">Twitter page</span>
               </a>
               <a
-                href="https://linkedin.com/in/jeremy0x/"
+                href="https://www.linkedin.com/in/adeyemi-muaz-ayomide-91459724a/"
                 target="_blank"
                 rel="noopener"
                 className="text-gray-500 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-110 hover:text-blue-500"

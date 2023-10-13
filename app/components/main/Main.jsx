@@ -4,14 +4,17 @@ import { useState } from "react";
 import { GoSearch } from "react-icons/go";
 import WordSearch from "./WordSearch";
 import "animate.css";
+import Spinner from "./Spinner";
 
 export default function Main() {
   const [word, setWord] = useState("");
   const [definition, setDefinition] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchDictionaryData = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const response = await fetch(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
       );
@@ -23,6 +26,8 @@ export default function Main() {
     } catch (error) {
       console.error("Error:", error);
       setDefinition(null);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -32,6 +37,7 @@ export default function Main() {
         <div className="animate__animated animate__fadeIn mx-auto  w-full max-w-5xl px-4">
           <div className="relative">
             <GoSearch className="absolute mt-5 ml-3 bg-gray-700 h-5 w-5 text-gray-500" />
+
             <input
               id="word-input"
               type="text"
@@ -43,7 +49,11 @@ export default function Main() {
             <button className="button" onClick={fetchDictionaryData}>
               Search
             </button>
-            {definition && <WordSearch definition={definition} />}
+            {isLoading ? (
+              <Spinner />
+            ) : definition ? (
+              <WordSearch definition={definition} />
+            ) : null}
           </div>
         </div>
       </main>

@@ -6,7 +6,7 @@ export default function Header() {
       <h1 className="animate__animated animate__bounceInDown animate__delay-0.7s max-w-full mt-16 overflow-hidden truncate whitespace-nowrap bg-gradient-to-r from-blue-600 to-white bg-clip-text px-4 pb-4 text-5xl font-extrabold text-transparent sm:text-6xl xl:text-7xl">
         DefineHub
       </h1>
-      <h3 className="animate__animated animate__bounceInLeft animate__delay-0.8s px-4 text-lg font-light text-gray-400 sm:text-2xl">
+      <h3 className="animate__animated animate__bounceInLeft animate__delay-0.8s px-4 text-lg font-bold text-gray-500 sm:text-2xl">
         Unlock Word Meanings, Synonyms, Antonyms, Origins, and Pronunciation in
         Seconds!
       </h3>

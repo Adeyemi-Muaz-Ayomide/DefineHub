@@ -1,6 +1,9 @@
 export default function Spinner() {
   return (
-    <div role="status">
+    <div
+      role="status"
+      className="flex flex-col justify-center items-center mt-28 max-md:mt-24 max-sm:mt-20"
+    >
       <svg
         aria-hidden="true"
         className="w-auto h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600 flex justify-center items-center place-items-center"
@@ -17,7 +20,7 @@ export default function Spinner() {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Loading...</span>
+      <p className=" text-base font-raleway mt-2">{`Please wait... This won't take a while`}</p>
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function DefinitionExamples({
 
       {/* example usage */}
       {exampleUsage && (
-        <p className="text-base font-light text-gray-400 sm:text-lg">
+        <p className="text-base font-raleway font-light text-gray-400 sm:text-lg">
           “{exampleUsage}”
         </p>
       )}

@@ -6,31 +6,47 @@ import { GoSearch } from "react-icons/go";
 import "animate.css";
 import Spinner from "./Spinner";
 import WordSearch from "./WordSearch";
+import { ErrorStatus, NotFoundStatus } from "./Status";
 
 export default function Main() {
   const [word, setWord] = useState("");
   const [definition, setDefinition] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [status, setStatus] = useState("");
 
   const fetchDictionaryData = async (e) => {
     e.preventDefault();
+    setStatus("loading");
     try {
-      setIsLoading(true);
       const response = await fetch(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
       );
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        setStatus("Not Found");
+      } else {
+        setStatus("Definition Found");
+        const data = await response.json();
+        setDefinition(data[0]);
+        setWord('')
       }
-      const data = await response.json();
-      setDefinition(data[0]);
     } catch (error) {
-      console.error("Error:", error);
-      setDefinition(null);
-    } finally {
-      setIsLoading(false);
+      if (error.message === "An error occurred: 404") {
+        setStatus("Not Found");
+      } else {
+        setStatus("error");
+      }
     }
   };
+
+  // if (status === "loading") {
+  //   return <Spinner />;
+  // }
+  // if (status === "Not Found") {
+  //   return <NotFoundStatus userInput={word} />;
+  // }
+  // if (status === "error") {
+  //   return <ErrorStatus />;
+  // }
 
   //     <div className="mb-40 flex-grow">
   //       <form className="animate__animated animate__fadeIn mx-auto w-full max-w-5xl px-4">
@@ -56,65 +72,68 @@ export default function Main() {
   //     </div>
 
   return (
-        <div className="mb-40 flex-grow">
-          <form className="animate__animated animate__fadeIn mx-auto w-full max-w-5xl px-4">
-            <div className="sr-only mb-2 text-sm font-medium text-gray-900">
-              Search
-            </div>
-            <div className="relative ">
-              <input
-                type="text"
-                className="block w-full rounded-lg border border-gray-600 bg-gray-700 py-3 pr-24 pl-10 text-gray-300 placeholder-gray-400 transition-all focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-                placeholder="Search for a word..."
-                value={word}
-                onChange={(e) => setWord(e.target.value)}
-              />
-              <button
-                className="absolute right-2.5 bottom-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-800"
-                onClick={fetchDictionaryData}
-              >
-                Search
-              </button>
-            </div>
-          </form>
-            {isLoading ? (
-              <Spinner />
-            ) : definition ? (
-              <WordSearch definition={definition} />
-            ) : null}
+    <div className="mb-40 flex-grow">
+      <form className="animate__animated animate__fadeIn mx-auto w-full max-w-5xl px-4">
+        <div className="sr-only mb-2 text-sm font-medium text-gray-900">
+          Search
         </div>
-
-
-);
+        <div className="relative ">
+          <input
+            type="text"
+            className="block w-full rounded-lg border border-gray-600 bg-gray-700 py-3 pr-24 pl-10 text-gray-300 placeholder-gray-400 transition-all focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+            placeholder="Search for a word..."
+            value={word}
+            onChange={(e) => setWord(e.target.value)}
+          />
+          <button
+            className="absolute right-2.5 bottom-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-800"
+            onClick={fetchDictionaryData}
+          >
+            Search
+          </button>
+        </div>
+      </form>
+      {/* {isLoading ? (
+        <Spinner />
+      ) : definition ? (
+        <WordSearch definition={definition} />
+      ) : null} */}
+      {status === "loading" && <Spinner />}
+      {status === "Not Found" && <NotFoundStatus userInput={word} />}
+      {status === "error" && <ErrorStatus />}
+      {status === "Definition Found" && <WordSearch definition={definition} />}
+    </div>
+  );
 }
 
-                    // <div className="flex flex-col min-h-[60vh]">
-                    //   <main className="flex-grow">
-                    //     <div className="animate__animated animate__fadeIn mx-auto  w-full max-w-5xl px-4">
-                    //       <div className="relative">
-                    //         <input
-                    //           id="word-input"
-                    //           type="text"
-                    //           className="w-full block rounded-lg pl-10 border border-gray-600 bg-gray-700 py-4   text-gray-300 transition-all focus:border-blue-500 focus:outline-none focus:ring-blue-500 "
-                    //           placeholder="Search for a word..."
-                    //           value={word}
-                    //           onChange={(e) => setWord(e.target.value)}
-                    //         />
-                    //         <button
-                    //           className="absolute right-2.5 bottom-3 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-800"
-                    //           onClick={fetchDictionaryData}
-                    //         >
-                    //           Search
-                    //         </button>
-                    //         {isLoading ? (
-                    //           <Spinner />
-                    //         ) : definition ? (
-                    //           <WordSearch definition={definition} />
-                    //         ) : null}
-                    //       </div>
-                    //     </div>
-                    //   </main>
-{/* <footer className=" mt-10  animate__animated animate__fadeIn animate__faster bottom-0 left-0 w-full border-t border-gray-700 border-opacity-50 transition-all">
+// <div className="flex flex-col min-h-[60vh]">
+//   <main className="flex-grow">
+//     <div className="animate__animated animate__fadeIn mx-auto  w-full max-w-5xl px-4">
+//       <div className="relative">
+//         <input
+//           id="word-input"
+//           type="text"
+//           className="w-full block rounded-lg pl-10 border border-gray-600 bg-gray-700 py-4   text-gray-300 transition-all focus:border-blue-500 focus:outline-none focus:ring-blue-500 "
+//           placeholder="Search for a word..."
+//           value={word}
+//           onChange={(e) => setWord(e.target.value)}
+//         />
+//         <button
+//           className="absolute right-2.5 bottom-3 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-800"
+//           onClick={fetchDictionaryData}
+//         >
+//           Search
+//         </button>
+//         {isLoading ? (
+//           <Spinner />
+//         ) : definition ? (
+//           <WordSearch definition={definition} />
+//         ) : null}
+//       </div>
+//     </div>
+//   </main>
+{
+  /* <footer className=" mt-10  animate__animated animate__fadeIn animate__faster bottom-0 left-0 w-full border-t border-gray-700 border-opacity-50 transition-all">
   <div className="mx-auto ">
     <div className="mx-2 sm:mx-4 lg:mx-8">
       <div className="p-4 sm:flex sm:items-center sm:justify-between sm:px-6 sm:pb-6 h-3/4">
@@ -192,4 +211,5 @@ export default function Main() {
       </div>
     </div>
   </div>
-</footer> */}
+</footer> */
+}

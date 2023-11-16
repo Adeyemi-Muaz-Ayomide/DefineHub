@@ -12,6 +12,7 @@ export default function Main() {
   const [userInput, setUserInput] = useState("");
   const [definition, setDefinition] = useState("");
   const [status, setStatus] = useState("");
+  const [audio, setAudio] = useState();
 
   const handleSubmit = (e) => {
     if (searchQuery.trim() == "") return;
@@ -38,6 +39,8 @@ export default function Main() {
         const data = await response.json();
         setDefinition(data[0]);
         setSearchQuery("");
+        const url = data[0].phonetics[0].audio;
+        setAudio(url);
       }
     } catch (error) {
       if (error.message === "An error occurred: 404") {
@@ -81,12 +84,17 @@ export default function Main() {
         value={searchQuery}
         onFetchData={fetchDictionaryData}
       />
-
       {status === "loading" && <Spinner />}
+
+      {/* {audio && <AudioComponent audio={audio} />} */}
       {status === "Not Found" && <NotFoundStatus userInput={userInput} />}
       {status === "error" && <ErrorStatus />}
       {status === "Definition Found" && (
-        <WordSearch definition={definition} handleWordClick={handleWordClick} />
+        <WordSearch
+          definition={definition}
+          handleWordClick={handleWordClick}
+          audio={audio}
+        />
       )}
     </div>
   );

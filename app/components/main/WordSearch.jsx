@@ -1,13 +1,21 @@
+import AudioComponent from "./AudioComponent";
 import DefinitionExamples from "./DefinitionExamples";
-import SourceLicense from "./SourceLicense";
 import SynonymsAntonyms from "./SynonymsAntonyms";
+import UnavailablePronunciation from "./UnavailablePronunciation";
 
-export default function WordSearch({ definition, handleWordClick }) {
+export default function WordSearch({ definition, handleWordClick, audio }) {
   return (
     <>
-      <h2 className=" font-raleway font-extrabold text-5xl my-10 lg:ml-20 ml-2">
-        {definition.word}
-      </h2>
+      <div className="flex flex-row justify-around items-center">
+        <h2 className=" font-raleway font-extrabold text-7xl my-10 lg:ml-20 ml-2 max-md:text-5xl max-sm:text-4xl">
+          {definition.word}
+        </h2>
+        {audio ? (
+          <AudioComponent audio={audio} definition={definition} />
+        ) : (
+          <UnavailablePronunciation audio={audio} definition={definition} />
+        )}
+      </div>
       <div className="mx-2 sm:mx-4 lg:mx-20">
         <div className="flex flex-col border-r border-l border-b border-t border-gray-500 border-t-gray-400 border-opacity-50 md:flex-row">
           <div>
@@ -60,66 +68,9 @@ export default function WordSearch({ definition, handleWordClick }) {
                 </div>
               ))}
           </div>
-          {/* <SourceLicense
-            sourceUrl={definition.sourceUrls[0]}
-            //   licenseDetails={wordData.license}
-          /> */}
+          {/* <SourceLicense sourceUrl={definition.sourceUrls[0]} /> */}
         </div>
       </div>
     </>
   );
 }
-
-// export default function WordDisplay({ wordData }) {
-//   const { word, phonetic, phonetics, origin, meanings } = wordData;
-
-//   return (
-//     <div className="mt-4">
-//       <h2 className="text-2xl font-bold">{word}</h2>
-//       {phonetic && <p>Phonetic: {phonetic}</p>}
-//       {phonetics && (
-//         <div>
-//           <p>Phonetics:</p>
-//           <ul>
-//             {phonetics.map((item, index) => (
-//               <li key={index}>
-//                 {item.text}
-//                 {item.audio && (
-//                   <audio controls>
-//                     <source src={`https:${item.audio}`} type="audio/mp3" />
-//                     Your browser does not support the audio tag.
-//                   </audio>
-//                 )}
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       )}
-//       {origin && <p>Origin: {origin}</p>}
-//       {meanings && (
-//         <div>
-//           <p>Meanings:</p>
-//           {meanings.map((meaning, index) => (
-//             <div key={index}>
-//               <p>{meaning.partOfSpeech}</p>
-//               <ul>
-//                 {meaning.definitions.map((definition, index) => (
-//                   <li key={index}>
-//                     {definition.definition}
-//                     {definition.example && <p>Example: {definition.example}</p>}
-//                     {definition.synonyms.length > 0 && (
-//                       <p>Synonyms: {definition.synonyms.join(", ")}</p>
-//                     )}
-//                     {definition.antonyms.length > 0 && (
-//                       <p>Antonyms: {definition.antonyms.join(", ")}</p>
-//                     )}
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };

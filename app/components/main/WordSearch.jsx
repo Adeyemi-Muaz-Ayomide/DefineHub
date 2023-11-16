@@ -2,7 +2,7 @@ import DefinitionExamples from "./DefinitionExamples";
 import SourceLicense from "./SourceLicense";
 import SynonymsAntonyms from "./SynonymsAntonyms";
 
-export default function WordSearch({ definition }) {
+export default function WordSearch({ definition, handleWordClick }) {
   return (
     <>
       <h2 className=" font-raleway font-extrabold text-5xl my-10 lg:ml-20 ml-2">
@@ -39,7 +39,7 @@ export default function WordSearch({ definition }) {
                           <SynonymsAntonyms
                             synonyms={def.synonyms}
                             antonyms={def.antonyms}
-                            // handleWordClick={handleWordClick}
+                            handleWordClick={handleWordClick}
                           />
                         )}
                       </div>
@@ -52,10 +52,11 @@ export default function WordSearch({ definition }) {
                         <SynonymsAntonyms
                           synonyms={meaning.synonyms}
                           antonyms={meaning.antonyms}
-                          // handleWordClick={handleWordClick}
+                          handleWordClick={handleWordClick}
                         />
                       </div>
                     )}
+                 
                   </div>
                 </div>
               ))}

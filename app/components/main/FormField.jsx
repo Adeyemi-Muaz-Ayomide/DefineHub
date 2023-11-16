@@ -1,4 +1,9 @@
-export default function FormField({ onSubmit , onInputChange, value, onFetchData }) {
+export default function FormField({
+  onSubmit,
+  onInputChange,
+  value,
+  onFetchData,
+}) {
   return (
     <form
       className="animate__animated animate__fadeIn mx-auto w-full max-w-5xl px-4"

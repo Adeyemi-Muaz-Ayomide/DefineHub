@@ -56,7 +56,6 @@ export default function WordSearch({ definition, handleWordClick }) {
                         />
                       </div>
                     )}
-                 
                   </div>
                 </div>
               ))}

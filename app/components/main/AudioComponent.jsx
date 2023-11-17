@@ -1,9 +1,15 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import PlayIcon from "./PlayIcon";
 
 export default function AudioComponent({ audio, definition }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(new Audio(audio));
+
+    useEffect(() => {
+      // Update the audio source when the audio prop changes
+      audioRef.current.src = audio;
+    }, [audio]);
+
   const playAudio = () => {
     if (!isPlaying) {
       audioRef.current.play();

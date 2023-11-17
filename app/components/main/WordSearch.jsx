@@ -68,7 +68,6 @@ export default function WordSearch({ definition, handleWordClick, audio }) {
                 </div>
               ))}
           </div>
-          {/* <SourceLicense sourceUrl={definition.sourceUrls[0]} /> */}
         </div>
       </div>
     </>
